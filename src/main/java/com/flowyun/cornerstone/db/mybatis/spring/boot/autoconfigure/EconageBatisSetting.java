@@ -33,7 +33,7 @@ public class EconageBatisSetting {
     /*
     * 外部配置
     * */
-    private List<EconageBatisUnitSetting> externalSettings;
+    private List<EconageBatisUnitSetting> externals;
 
     public boolean isEnabled() {
         return enabled;
@@ -51,15 +51,15 @@ public class EconageBatisSetting {
         this.primary = primary;
     }
 
-    public void setExternalSettings(List<EconageBatisUnitSetting> externalSettings) {
-        this.externalSettings = externalSettings;
+    public void setExternals(List<EconageBatisUnitSetting> externals) {
+        this.externals = externals;
     }
 
     public EconageBatisUnitSetting selectExternalSetting(String externalSettingName){
-        if(StringUtils.isEmpty(externalSettingName)|| CollectionUtils.isEmpty(externalSettings)){
+        if(StringUtils.isEmpty(externalSettingName)|| CollectionUtils.isEmpty(externals)){
             return null;
         }
-        for(EconageBatisUnitSetting externalSetting : externalSettings){
+        for(EconageBatisUnitSetting externalSetting : externals){
             if(externalSettingName.equals(externalSetting.getName())){
                 return externalSetting;
             }
@@ -93,10 +93,10 @@ public class EconageBatisSetting {
         DataSource primaryMaster = DatasourceParser.buildDataSource(primary);
 
         Map<String,DataSource> externalDataSourceMap = Collections.emptyMap();
-        if(!CollectionUtils.isEmpty(externalSettings)){
+        if(!CollectionUtils.isEmpty(externals)){
             externalDataSourceMap = new HashMap<>();
             int idx=1;
-            for(EconageBatisUnitSetting externalSetting : externalSettings){
+            for(EconageBatisUnitSetting externalSetting : externals){
                 String dataSourceName = externalSetting.getName();
                 if(StringUtils.isEmpty(dataSourceName)){
                     dataSourceName = "external"+idx;
