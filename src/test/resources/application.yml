@@ -1,0 +1,22 @@
+econage:
+  econage-batis:
+    enabled: true
+    statement-monitor-enabled: true
+    primary:
+      dyna-bean-mapper-enabled: true
+      db-type: MYSQL8
+      datasource-props:
+        dataSourceClassName: org.mariadb.jdbc.MariaDbDataSource
+        autoCommit: false
+        connectionTimeout: 30000
+        maxLifetime: 1770000
+        minimumIdle: 5
+        maximumPoolSize: 10
+        transactionIsolation: TRANSACTION_READ_COMMITTED
+        'dataSource.loginTimeout': 5
+
+        'dataSource.url': jdbc:mariadb://192.168.0.59:3306/test
+        'dataSource.user': newsoft
+        'dataSource.password': econage123
+
+

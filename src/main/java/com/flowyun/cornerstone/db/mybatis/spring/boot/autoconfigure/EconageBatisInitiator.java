@@ -6,7 +6,6 @@ import com.flowyun.cornerstone.db.mybatis.enums.DBType;
 import com.flowyun.cornerstone.db.mybatis.handlers.*;
 import com.flowyun.cornerstone.db.mybatis.mapper.DynaBeanMapper;
 import com.flowyun.cornerstone.db.mybatis.monitor.StatementMonitor;
-import com.flowyun.cornerstone.db.mybatis.spring.boot.autoconfigure.setting.EconageBatisBasicSetting;
 import com.flowyun.cornerstone.db.mybatis.uid.dbincrementer.DB2KeyGenerator;
 import com.flowyun.cornerstone.db.mybatis.uid.dbincrementer.H2KeyGenerator;
 import com.flowyun.cornerstone.db.mybatis.uid.dbincrementer.OracleKeyGenerator;
@@ -90,7 +89,7 @@ public class EconageBatisInitiator {
 
 
     public EconageBatisInitiator parse(
-            EconageBatisBasicSetting setting,
+            EconageBatisUnitSetting setting,
             DataSource dataSource,
             StatementMonitor monitor
     ){
