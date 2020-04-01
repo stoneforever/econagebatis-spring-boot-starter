@@ -51,8 +51,8 @@ public class DatasourceParser {
     }
 
     private static Properties resolveDataSourceProps(EconageBatisUnitSetting unitSetting) throws Exception {
-        Properties dataSourceProps = new Properties(unitSetting.getDataSourceProps());
-
+        Properties dataSourceProps = new Properties();
+        dataSourceProps.putAll(unitSetting.getDataSourceProps());
         /*
         * 解密
         * */
