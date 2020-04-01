@@ -18,6 +18,7 @@ public class EconageBatisUnitSetting {
     private boolean localDateTimeCompatible;
     //密码解密用公钥
     private String pwdPublicKey;
+    //需要操作的数据库属性
     private String pwdNameInProps;
     //连接池类型，推荐使用HikariCP
     private Class<? extends DataSource> datasourceType = HikariDataSource.class;

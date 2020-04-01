@@ -1,12 +1,15 @@
 package com.flowyun.cornerstone.db.mybatis.spring.boot.datasouce;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.Map;
 
-public class DatasourceHolder {
+public class DatasourceHolder implements DisposableBean {
 
     private final DataSource primaryMaster;
 
@@ -31,4 +34,23 @@ public class DatasourceHolder {
         }
         return externals.get(externalSettingName);
     }
+
+    @Override
+    public void destroy() throws Exception {
+        closeDataSource(primaryMaster);
+        if(externals!=null){
+            for(DataSource exDs : externals.values()){
+                closeDataSource(exDs);
+            }
+        }
+
+    }
+
+    private void closeDataSource(DataSource ds) throws IOException {
+        if(ds instanceof Closeable){
+            ((Closeable)ds).close();
+        }
+    }
+
+
 }
