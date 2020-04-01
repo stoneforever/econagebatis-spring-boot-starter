@@ -86,7 +86,7 @@ public class EconageBatisSetting {
 
 
 
-    DatasourceHolder createDatasourceHolder(){
+    DatasourceHolder createDatasourceHolder() throws Exception {
         Assert.notNull(primary,"no primary setting!");
         Assert.notNull(primary.getDataSourceProps(),"no primary datasource setting!");
 

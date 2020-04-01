@@ -79,7 +79,7 @@ public class EconageBatisAutoConfigure {
 
     @Bean
     @ConditionalOnMissingBean
-    public DatasourceHolder econageBatisDatasourceHolder(EconageBatisSetting setting){
+    public DatasourceHolder econageBatisDatasourceHolder(EconageBatisSetting setting) throws Exception {
         logger.info("Setting up default DatasourceHolder.");
         return setting.createDatasourceHolder();
     }

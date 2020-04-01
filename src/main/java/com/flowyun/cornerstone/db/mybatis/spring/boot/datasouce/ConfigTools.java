@@ -20,10 +20,6 @@ public class ConfigTools {
         System.out.println("password:" + encrypt(arr[0], password));
     }*/
 
-    public static String decrypt(String cipherText) throws Exception {
-        return decrypt((String) null, cipherText);
-    }
-
     public static String decrypt(String publicKeyText, String cipherText) throws Exception {
         PublicKey publicKey = getPublicKey(publicKeyText);
 
@@ -66,10 +62,6 @@ public class ConfigTools {
         byte[] plainBytes = cipher.doFinal(cipherBytes);
 
         return new String(plainBytes);
-    }
-
-    public static String encrypt(String plainText) throws Exception {
-        return encrypt((String) null, plainText);
     }
 
     public static String encrypt(String key, String plainText) throws Exception {

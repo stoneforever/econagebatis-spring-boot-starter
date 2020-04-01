@@ -13,6 +13,7 @@ import org.springframework.boot.context.properties.source.MapConfigurationProper
 import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 public class DatasourceParser {
 
@@ -26,26 +27,43 @@ public class DatasourceParser {
     }
 
 
-    public static DataSource buildDataSource(EconageBatisUnitSetting batisBasicSetting){
+    public static DataSource buildDataSource(EconageBatisUnitSetting unitSetting) throws Exception {
 
-        Class<? extends DataSource> type = batisBasicSetting.getDatasourceType();
+        Properties dataSourceProps = resolveDataSourceProps(unitSetting);
+        Class<? extends DataSource> type = unitSetting.getDatasourceType();
         if(type==null){
             type = HikariDataSource.class;
         }
 
         if(type == HikariDataSource.class){
-            HikariConfig config = new HikariConfig(batisBasicSetting.getDataSourceProps());
+            HikariConfig config = new HikariConfig(dataSourceProps);
             if(StringUtils.isEmpty(config.getPoolName())){
-                config.setPoolName(batisBasicSetting.getName());
+                config.setPoolName(unitSetting.getName());
             }
             return new HikariDataSource(config);
         }
 
         DataSource result = BeanUtils.instantiateClass(type);
-        ConfigurationPropertySource source = new MapConfigurationPropertySource(batisBasicSetting.getDataSourceProps());
+        ConfigurationPropertySource source = new MapConfigurationPropertySource(dataSourceProps);
         Binder binder = new Binder(source.withAliases(aliases));
         binder.bind(ConfigurationPropertyName.EMPTY, Bindable.ofInstance(result));
         return result;
+    }
+
+    private static Properties resolveDataSourceProps(EconageBatisUnitSetting unitSetting) throws Exception {
+        Properties dataSourceProps = new Properties(unitSetting.getDataSourceProps());
+
+        /*
+        * 解密
+        * */
+        if(!StringUtils.isEmpty(unitSetting.getPwdNameInProps() )
+         &&!StringUtils.isEmpty(unitSetting.getPwdPublicKey())  ){
+            String pwdValue = dataSourceProps.getProperty(unitSetting.getPwdNameInProps());
+            String decryptPwd = ConfigTools.decrypt(unitSetting.getPwdPublicKey(),pwdValue);
+            dataSourceProps.setProperty(unitSetting.getPwdNameInProps(),decryptPwd);
+        }
+
+        return dataSourceProps;
     }
 
 }

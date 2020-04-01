@@ -8,7 +8,7 @@
   <groupId>com.flowyun</groupId>
   <artifactId>econagebatis-spring-boot-starter</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Mybatis Enhancement</description>
   <url>https://github.com/stoneforever/econagebatis-spring-boot-starter</url>
@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.2.5.RELEASE</version>
+    <version>2.2.6.RELEASE</version>
   </parent>
 
   <licenses>
