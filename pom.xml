@@ -8,7 +8,7 @@
   <groupId>com.flowyun</groupId>
   <artifactId>econagebatis-spring-boot-starter</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Mybatis Enhancement</description>
   <url>https://github.com/stoneforever/econagebatis-spring-boot-starter</url>
@@ -118,6 +118,16 @@
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
       <version>2.0.4</version>
+    </dependency>
+    <dependency>
+      <groupId>ognl</groupId>
+      <artifactId>ognl</artifactId>
+      <version>3.2.12</version>
+    </dependency>
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>3.3.0</version>
     </dependency>
 
     <dependency>

@@ -11,6 +11,7 @@ import com.flowyun.cornerstone.db.mybatis.uid.dbincrementer.H2KeyGenerator;
 import com.flowyun.cornerstone.db.mybatis.uid.dbincrementer.OracleKeyGenerator;
 import com.flowyun.cornerstone.db.mybatis.uid.dbincrementer.PostgreKeyGenerator;
 import org.apache.ibatis.builder.BuilderException;
+import org.apache.ibatis.executor.loader.cglib.CglibProxyFactory;
 import org.apache.ibatis.logging.slf4j.Slf4jImpl;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.ExecutorType;
@@ -62,6 +63,7 @@ public class EconageBatisInitiator {
         configuration.setLogImpl(Slf4jImpl.class);
         configuration.setDefaultEnumTypeHandler(DefaultEnumTypeHandler.class);
         configuration.getTypeHandlerRegistry().register(Locale.class,JdbcType.VARCHAR,new LocaleTypeHandler());
+        configuration.setProxyFactory(new CglibProxyFactory());
     }
 
     private void refreshDbType(){
